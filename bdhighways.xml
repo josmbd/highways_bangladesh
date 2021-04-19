@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0" author="AtikurRahmanAtik"
+shortdescription="Highway Tag_BD"
+description="Tag easily highways from Bangladesh. Begin to be localizated."
+version="1.2021-04-20">
+
+
+    <!-- Item chunks -->
+    <chunk id="surface">
+        <combo key="surface" text="Surface" values="paved,unpaved,asphalt,concrete,concrete:plates,concrete:lanes,paving_stones,sett,cobblestone,grass_paver,compacted,fine_gravel,gravel,pebblestone,ground,mud,sand,grass,wood,metal" />
+    </chunk>
+    <chunk id="surface_smoothness">
+        <reference ref="surface" />
+        <combo key="smoothness" text="Smoothness" values_searchable="true" values_sort="false">
+            <list_entry value="excellent" short_description="Thin Rollers: rollerblade, skateboard" />
+            <list_entry value="good" short_description="Thin Wheels: racing bike" />
+            <list_entry value="intermediate" short_description="Wheels: city bike, wheelchair, scooter" />
+            <list_entry value="bad" short_description="Robust Wheels: trekking bike, car, rickshaw" />
+            <list_entry value="very_bad" short_description="High Clearance: light duty off-road vehicle" />
+            <list_entry value="horrible" short_description="Off-Road: heavy duty off-road vehicle" />
+            <list_entry value="very_horrible" short_description="Specialized off-road: tractor, ATV" />
+            <list_entry value="impassable" short_description="No wheeled vehicle" />
+        </combo>
+    </chunk>
+    <chunk id="sport_surface">
+        <combo key="surface" text="Surface" values="artificial_turf,asphalt,clay,concrete,decoturf,grass,sand,tartan,ground" />
+    </chunk>
+    <chunk id="riding_surface">
+        <combo key="leisure" text="Type" values="horse_riding,pitch,sports_centre,stadium,track" values_context="riding" />
+        <combo key="surface" text="Surface" values="grass,sand,clay,dirt,fine_gravel,ground,mud,unpaved,compacted" />
+    </chunk>
+    <chunk id="highway_base">
+        <combo key="lanes" text="Lanes" values="1,2,3,4,5,6" length="3" />
+        <combo key="lanes:forward" text="Lanes in way direction" values="1,2,3,4,5" length="3" />
+        <combo key="lanes:backward" text="Lanes opposed to way direction" values="1,2,3,4,5" length="3" />
+        <space />
+        <text key="maxspeed" text="Max. speed (km/h)" />
+        <text key="maxspeed:forward" text="Max. speed in way direction" />
+        <text key="maxspeed:backward" text="Max. speed opposed to way direction" />
+        <space />
+        <combo key="layer" text="Layer" values="5,4,3,2,1,0,-1,-2,-3,-4,-5" length="3" values_sort="false" />
+        <reference ref="surface_smoothness" />
+    </chunk>
+    <chunk id="highway_yesno">
+        <checkgroup columns="4">
+            <check key="bridge" text="Bridge" disable_off="true" />
+            <check key="tunnel" text="Tunnel" disable_off="true" />
+            <check key="embankment" text="Embankment" disable_off="true" />
+            <check key="cutting" text="Cutting" disable_off="true" />
+        </checkgroup>
+    </chunk>
+    <chunk id="highway_yesno_incline">
+        <reference ref="highway_yesno" />
+        <combo key="incline" text="Incline" values="10%,-10%,10°,-10°,up,down" />
+    </chunk>
+    <chunk id="highway_yesno_incline_oneway_lit_width">
+        <checkgroup columns="4">
+            <check key="bridge" text="Bridge" disable_off="true" />
+            <check key="tunnel" text="Tunnel" disable_off="true" />
+            <check key="embankment" text="Embankment" disable_off="true" />
+            <check key="cutting" text="Cutting" disable_off="true" />
+        </checkgroup>
+        <checkgroup columns="4">
+            <check key="oneway" text="Oneway" />
+            <check key="lit" text="Lit" />
+        </checkgroup>
+        <combo key="incline" text="Incline" values="10%,-10%,10°,-10°,up,down" />
+        <text key="width" text="Width (meters)" />
+    </chunk>
+    <chunk id="highway_yesno_incline_oneway_lit_width_busbay_sidewalk">
+        <reference ref="highway_yesno_incline_oneway_lit_width" />
+        <combo key="bus_bay" text="Bus bay" values="both,left,right" />
+        <combo key="sidewalk" text="Sidewalk" values="both,left,right,no,separate" values_context="sidewalk" />
+    </chunk>
+    <chunk id="placement_shoulder">
+        <combo key="placement" text="Placement" values="left_of:1,left_of:2,left_of:3,left_of:4,left_of:5,middle_of:1,middle_of:2,middle_of:3,middle_of:4,middle_of:5,right_of:1,right_of:2,right_of:3,right_of:4,right_of:5,transition" />
+        <combo key="placement:forward" text="Placement in way direction" values="left_of:1,left_of:2,left_of:3,left_of:4,left_of:5,middle_of:1,middle_of:2,middle_of:3,middle_of:4,middle_of:5,right_of:1,right_of:2,right_of:3,right_of:4,right_of:5" />
+        <combo key="placement:backward" text="Placement opposed to way direction" values="left_of:1,left_of:2,left_of:3,left_of:4,left_of:5,middle_of:1,middle_of:2,middle_of:3,middle_of:4,middle_of:5,right_of:1,right_of:2,right_of:3,right_of:4,right_of:5" />
+        <combo key="shoulder" text="Shoulder" values="yes,no,left,right,both" />
+    </chunk>
+    <chunk id="railway_service">
+        <combo key="service" text="Service type" values="yard,siding,spur,crossover" />
+    </chunk>
+    <chunk id="railway_electrified_yesno">
+        <combo key="electrified" text="Electrified" values="contact_line,no,yes,rail" values_context="electrified" />
+        <combo key="voltage" text="Voltage in Volts (V)" values="600,650,750,1500,3000,15000,25000" length="5" />
+        <combo key="frequency" text="Frequency in Hertz (Hz)" values="0,16.67,16.7,25" length="5" values_sort="false" />
+        <reference ref="highway_yesno" />
+    </chunk>
+    <chunk id="railway_service_gauge_electrified_yesno">
+        <reference ref="railway_service" />
+        <combo key="tracks" text="Tracks" text_context="railway" values="1,2,3,4" length="4" />
+        <combo key="gauge" text="Gauge (mm)" values="1668,1676,1674,1600,1524,1520,1495,1435,1067,1000,914,762,760,750" length="4" />
+        <reference ref="railway_electrified_yesno" />
+    </chunk>
+    <chunk id="check_access_nomotor">
+        <optional text="Non-motorized traffic:">
+            <checkgroup columns="3">
+                <check key="foot" text="Foot" icon="presets/vehicle/restriction/plain/foot.svg" />
+                <check key="bicycle" text="Bicycle" icon="presets/vehicle/restriction/plain/bicycle.svg" />
+                <check key="horse" text="Horse" icon="presets/vehicle/restriction/plain/horse.svg" />
+            </checkgroup>
+        <space />
+        <reference ref="wheelchair" />
+        </optional>
+    </chunk>
+    <chunk id="check_access_motor">
+        <optional text="Motor vehicle traffic:">
+            <combo key="motor_vehicle" text="Motor vehicles" values="yes,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" />
+            <space />
+            <checkgroup columns="2">
+                <check key="motorcar" text="Motorcar" icon="presets/vehicle/restriction/plain/motorcar.svg" />
+                <check key="motorcycle" text="Motorcycle" icon="presets/vehicle/restriction/plain/motorcycle.svg" />
+                <check key="moped" text="Moped" icon="presets/vehicle/restriction/plain/moped.svg" />
+                <check key="mofa" text="Mofa" icon="presets/vehicle/restriction/plain/mofa.svg" />
+            </checkgroup>
+        </optional>
+    </chunk>
+    <chunk id="common_advertising">
+        <text key="height" text="Height (meters)" length="7" />
+        <combo key="animated" text="Animated" values="yes,winding_posters,screen,trivision_blades,revolving,digital_messages,digital_prices,no" values_sort="false" />
+        <check key="luminous" text="Luminous" />
+        <check key="lit" text="Lit" />
+    </chunk>
+    <chunk id="min_age">
+        <text key="min_age" text="Minimum age" />
+    </chunk>
+    <chunk id="max_age">
+        <text key="max_age" text="Maximum age" />
+    </chunk>
+    <chunk id="name_ref">
+        <text key="name" text="Name" />
+        <text key="ref" text="Reference" />
+    </chunk>
+    <chunk id="ref_operator">
+        <text key="ref" text="Reference" />
+        <text key="operator" text="Operator" />
+    </chunk>
+    <chunk id="name_ref_operator">
+        <text key="name" text="Name" />
+        <reference ref="ref_operator" />
+    </chunk>
+    <chunk id="name_operator">
+        <text key="name" text="Name" />
+        <text key="operator" text="Operator" />
+    </chunk>
+    <chunk id="name_layer">
+        <text key="name" text="Name" />
+        <combo key="layer" text="Layer" values="5,4,3,2,1,0,-1,-2,-3,-4,-5" length="3" values_sort="false" />
+    </chunk>
+    <chunk id="service_times">
+        <combo key="service_times" text="Service Times" delimiter="|" values="18:00|sunset,sunrise|Su 09:30,11:00|Sa,Su,PH 09:00|Sa 18:00; Su 10:45|Fr 08:00-18:00; Apr 10-15 off; Jun 07:00-20:00; Aug off; Dec 24 08:00-24:00|Sa 10:00+|week 01-53/2 Fr 09:00-12:00; week 02-52/2 We 09:00-12:00" values_no_i18n="true" />
+    </chunk>
+    <chunk id="oh">
+        <combo key="opening_hours" text="Opening Hours" delimiter="|" values="24/7|08:30-12:30,15:30-20:00|Sa-Su 00:00-24:00|Mo-Su 09:00-21:00|Mo-Sa 08:00-18:00|Mo-Fr 09:00-17:00|Mo-Fr 08:30-20:00; Sa,Su 08:00-15:00; PH off|Mo-Fr 08:30-20:00; Tu-Su 08:00-15:00; Sa 08:00-12:00|Mo-Su 08:00-18:00; Apr 10-15 off; Jun 08:00-14:00; Aug off; Dec 25 off|sunrise-sunset|Su 10:00+|week 01-53/2 Fr 09:00-12:00; week 02-52/2 We 09:00-12:00" values_no_i18n="true" values_sort="false" />
+    </chunk>
+    <chunk id="wheelchair">
+        <combo key="wheelchair" text="Wheelchairs" values="yes,designated,limited,no" values_sort="false" />
+    </chunk>
+    <chunk id="oh_wheelchair">
+        <reference ref="oh" />
+        <reference ref="wheelchair" />
+    </chunk>
+    <chunk id="name_oh_wheelchair">
+        <text key="name" text="Name" />
+        <reference ref="oh_wheelchair" />
+    </chunk>
+    <chunk id="name_operator_oh_wheelchair">
+        <reference ref="name_operator" />
+        <reference ref="oh_wheelchair" />
+    </chunk>
+    <chunk id="name_brand_operator_oh_wheelchair">
+        <text key="name" text="Name" />
+        <text key="brand" text="Brand" />
+        <text key="operator" text="Operator" />
+        <reference ref="oh_wheelchair" />
+    </chunk>
+    <chunk id="name_brand_oh_wheelchair">
+        <text key="name" text="Name" />
+        <text key="brand" text="Brand" />
+        <reference ref="oh_wheelchair" />
+    </chunk>
+    <chunk id="cuisine">
+    <multiselect key="cuisine" text="Cuisine" values="african;american;arab;argentinian;asian;bagel;balkan;barbecue;bavarian;beef_bowl;brazilian;burger;cake;caribbean;chicken;chinese;coffee_shop;crepe;curry;danish;donut;ethiopian;filipino;fish;fish_and_chips;french;friture;frozen_yogurt;german;georgian;greek;heuriger;hot_dog;ice_cream;indian;indonesian;international;italian;japanese;kebab;korean;lebanese;malaysian;mediterranean;mexican;moroccan;noodle;pancake;pasta;persian;peruvian;pizza;polish;portuguese;ramen;regional;russian;sandwich;sausage;seafood;soba;spanish;steak_house;sushi;tex-mex;tapas;thai;turkish;vietnamese;wings" values_searchable="true" />
+    </chunk>
+    <chunk id="internet">
+        <combo key="internet_access" text="Internet access" values="yes,wlan,wired,terminal,no" />
+        <combo key="internet_access:fee" text="Internet access fee" values="yes,no" />
+    </chunk>
+    <chunk id="internet_smoking">
+        <reference ref="internet" />
+        <combo key="smoking" text="Smoking" values="yes,dedicated,separated,isolated,outside,no" />
+    </chunk>
+    <chunk id="optional_height">
+        <optional>
+            <text key="height" text="Height (meters)" length="7" />
+        </optional>
+    </chunk>
+    <chunk id="optional_maxwidth">
+        <optional>
+            <text key="maxwidth" text="Max. width (meters)" length="7" />
+        </optional>
+    </chunk>
+    <chunk id="optional_maxheight_maxwidth">
+        <optional>
+            <text key="maxheight" text="Max. height (meters)" length="7" />
+            <text key="maxwidth" text="Max. width (meters)" length="7" />
+        </optional>
+    </chunk>
+    <chunk id="optional_name">
+        <optional>
+            <text key="name" text="Name" />
+        </optional>
+    </chunk>
+    <chunk id="optional_name_operator">
+        <optional>
+            <text key="name" text="Name" />
+            <text key="operator" text="Operator" />
+        </optional>
+    </chunk>
+    <chunk id="name_leisure_pitch">
+        <text key="name" text="Name" />
+        <combo key="leisure" text="Type" values="pitch,sports_centre,stadium" default="pitch" />
+    </chunk>
+    <chunk id="sport">
+        <multiselect key="sport" text="Sport" values="10pin;9pin;american_football;archery;athletics;australian_football;baseball;basketball;beachvolleyball;billiards;boules;bowls;canadian_football;canoe;chess;climbing;cricket;croquet;curling;cycling;dog_racing;equestrian;field_hockey;fitness;gaelic_games;golf;gymnastics;handball;horse_racing;ice_hockey;ice_skating;karting;model_aerodrome;motocross;motor;multi;pelota;racquet;rc_car;roller_skating;rowing;rugby_league;rugby_union;running;safety_training;scuba_diving;shooting;skateboard;soccer;surfing;swimming;table_tennis;tennis;volleyball" values_context="sport" />
+    </chunk>
+    <chunk id="highway_access">
+        <combo key="access" text="General Access" values="yes,destination,delivery,permissive,permit,private,customers,agricultural,forestry,no" values_sort="false" />
+    </chunk>
+    <chunk id="highway_access_vehicle">
+        <reference ref="highway_access" />
+        <combo key="vehicle" text="All vehicles" values="yes,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" />
+    </chunk>
+    <chunk id="POI_access">
+        <combo key="access" text="General Access" values="yes,private,customers,permissive,no" values_sort="false" />
+    </chunk>
+    <chunk id="path_access_modes">
+        <combo key="ski" text="Ski" values="yes,official,designated,permissive,private,no" values_sort="false" />
+        <combo key="snowmobile" text="Snowmobile" values="yes,official,designated,permissive,destination,delivery,private,no" values_sort="false" />
+        <combo key="dog" text="Dog" values="yes,leashed,unleashed,official,designated,permissive,private,no" values_sort="false" match="key" />
+        <combo key="horse" text="Horse" values="yes,official,designated,permissive,destination,delivery,private,no" values_sort="false" />
+        <space />
+        <label text="Tags which are implied and do not need to be set are `motor_vehicle=no` and `emergency=destination`." />
+        <combo key="vehicle" text="All vehicles" values="yes,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" />
+        <combo key="motor_vehicle" text="Motor vehicles" values="yes,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" match="key" />
+    </chunk>
+    <chunk id="fee">
+        <combo key="fee" text="Fee" values="yes,no" />
+    </chunk>
+    <chunk id="fee_interval">
+        <combo key="fee" text="Fee" delimiter="|" values="yes|no|06:00-20:00|Mo-Fr 09:00-18:00,Sa 08:00-14:00|May-Sep 09:30-12:30,14:15-19:30" values_no_i18n="true" values_sort="false" />
+    </chunk>
+    <chunk id="parking_name_type_ref">
+        <text key="name" text="Name" />
+        <combo key="parking" text="Type" values="multi-storey,surface,underground,rooftop,street_side,lane" values_context="parking" />
+        <text key="ref" text="Reference number" />
+    </chunk>
+    <chunk id="parking_access_fee_operator_surface_smoothness">
+        <space />
+        <reference ref="POI_access" />
+        <reference ref="fee_interval" />
+        <text key="operator" text="Operator" />
+        <reference ref="surface_smoothness" />
+    </chunk>
+    <chunk id="maxstay">
+        <combo key="maxstay" text="Time Limit" values="30 minutes,60 minutes,180 minutes,1 hour,1.5 hours,1 day,3 days,2 weeks,4 months,1.5 years,unlimited,no,load-unload" values_no_i18n="true" values_sort="false" />
+    </chunk>
+    <chunk id="supervised">
+        <combo key="supervised" text="Supervised" delimiter="|" values="yes|no|06:00-20:00|Mo-Fr 09:00-18:00,Sa 08:00-14:00|May-Sep 09:30-12:30,14:15-19:30" values_i18n="false" values_sort="false" />
+    </chunk>
+    <chunk id="supervised_lit_oh">
+        <reference ref="supervised" />
+        <combo key="lit" text="Lit" delimiter="|" values="yes|no|06:00-20:00|Mo-Fr 09:00-18:00,Sa 08:00-14:00|May-Sep 09:30-12:30,14:15-19:30" values_i18n="false" values_sort="false" />
+        <reference ref="oh" />
+    </chunk>
+    <chunk id="wikipedia_wikidata">
+        <text key="wikipedia" text="Wikipedia" />
+        <text key="wikidata" text="Wikidata" />
+    </chunk>
+    <chunk id="name_wikipedia_wikidata">
+        <text key="name" text="Name" />
+        <reference ref="wikipedia_wikidata" />
+    </chunk>
+    <chunk id="population_postcode_website">
+        <text key="population" text="Population" />
+        <text key="postal_code" text="Postal Code" />
+        <text key="website" text="Website" />
+    </chunk>
+    <chunk id="route_hikebike_optionals">
+        <text key="ref" text="Reference" />
+        <text key="operator" text="Operator" />
+        <text key="distance" text="Distance (kilometers)"/>
+        <text key="ascent" text="Ascent (m)"/>
+        <text key="descent" text="Descent (m)"/>
+        <check key="roundtrip" text="Roundtrip"/>
+        <text key="symbol" text="Symbol description"/>
+        <text key="description" text="Description"/>
+        <text key="website" text="Website" />
+    </chunk>
+    <chunk id="genus_species_taxon">
+        <text key="genus" text="Genus" />
+        <text key="species" text="Species" />
+        <text key="taxon" text="Taxon" />
+    </chunk>
+    <chunk id="leaf">
+        <combo key="leaf_type" text="Leaf type" values="broadleaved,needleleaved,mixed,leafless" values_searchable="true" />
+        <combo key="leaf_cycle" text="Leaf cycle" values_searchable="true" >
+            <list_entry value="deciduous" short_description="Plants that are leafless for a certain period during the year." />
+            <list_entry value="evergreen" short_description="Plants that are never entirely without green foliage." />
+            <list_entry value="semi_deciduous" short_description="Plants that lose their foliage for a very short period, when old leaves fall off and new foliage growth is starting." />
+            <list_entry value="semi_evergreen" short_description="Plants that lose most, but not all, of their foliage for a fraction of the year." />
+            <list_entry value="mixed" short_description="Habitat with evergreen and deciduous vegetation." />
+        </combo>
+    </chunk>
+    <chunk id="leaf_without_mixed">
+        <combo key="leaf_type" text="Leaf type" values="broadleaved,needleleaved,leafless" values_searchable="true" />
+        <combo key="leaf_cycle" text="Leaf cycle" values_searchable="true" >
+            <list_entry value="deciduous" short_description="Plants that are leafless for a certain period during the year." />
+            <list_entry value="evergreen" short_description="Plants that are never entirely without green foliage." />
+            <list_entry value="semi_deciduous" short_description="Plants that lose their foliage for a very short period, when old leaves fall off and new foliage growth is starting." />
+            <list_entry value="semi_evergreen" short_description="Plants that lose most, but not all, of their foliage for a fraction of the year." />
+        </combo>
+    </chunk>
+    <!-- start of religions and denominations -->
+    <chunk id="religious"> <!-- all religions and denominations -->
+        <combo key="religion" text="Religion" values="bahai,buddhist,caodaism,christian,confucian,hindu,jain,jewish,muslim,shinto,sikh,spiritualist,taoist,tenrikyo,unitarian_universalist,zoroastrian" values_searchable="true" />
+        <combo key="denomination" text="Denomination" values="anglican,baptist,catholic,church_of_scotland,conservative,evangelical,greek_catholic,greek_orthodox,ibadi,iglesia_ni_cristo,jehovahs_witness,lutheran,mahayana,methodist,mormon,new_apostolic,nondenominational,old_catholic,orthodox,pentecostal,presbyterian,protestant,quaker,reform,reformed,roman_catholic,romanian_orthodox,russian_orthodox,serbian_orthodox,seventh_day_adventist,shaivism,shaktism,shia,smartism,spiritist,sunni,tibetan,theravada,united,united_methodist,vaishnavism,vajrayana" values_searchable="true" />
+    </chunk>
+    <chunk id="religious_catholic_christian"> <!-- special case for wayside_shrine and wayside_cross: all religions and catholic denominations with default to catholic christian -->
+        <combo key="religion" text="Religion" values="bahai,buddhist,caodaism,christian,confucian,hindu,jain,jewish,muslim,shinto,sikh,spiritualist,taoist,tenrikyo,unitarian_universalist,zoroastrian" default="christian" values_searchable="true" />
+        <combo key="denomination" text="Denomination" values="catholic,greek_catholic,old_catholic,orthodox,roman_catholic" default="catholic" values_searchable="true" />
+    </chunk>
+    <chunk id="other_religions"> <!-- religions which don't have an own preset -->
+        <combo key="religion" text="Religion" values="bahai,caodaism,confucian,jain,sikh,spiritualist,taoist,tenrikyo,unitarian_universalist,zoroastrian" match="keyvalue!" values_searchable="true" />
+    </chunk> 
+    <chunk id="christian_denominations"> <!-- christian denominations -->
+        <combo key="denomination" text="Denomination" values="anglican,baptist,catholic,church_of_scotland,evangelical,greek_catholic,greek_orthodox,iglesia_ni_cristo,jehovahs_witness,lutheran,methodist,mormon,new_apostolic,nondenominational,old_catholic,orthodox,pentecostal,presbyterian,protestant,quaker,reformed,roman_catholic,romanian_orthodox,russian_orthodox,serbian_orthodox,seventh_day_adventist,spiritist,united,united_methodist" values_searchable="true" />
+    </chunk>
+    <chunk id="muslim_denominations"> <!-- muslim denominations -->
+        <combo key="denomination" text="Denomination" values="ibadi,nondenominational,shia,sunni" values_searchable="true" />
+    </chunk>
+    <chunk id="jewish_denominations"> <!-- jewish denominations -->
+        <combo key="denomination" text="Denomination" values="orthodox,conservative,nondenominational,reform" values_context="jewish" values_searchable="true" /> <!-- values_context because of orthodox, #9629 -->
+    </chunk>
+    <chunk id="buddhist_denominations"> <!-- buddhist denominations -->
+        <combo key="denomination" text="Denomination" values="tibetan,theravada,mahayana,vajrayana" values_searchable="true" />
+    </chunk>
+    <chunk id="hindu_denominations"> <!-- hindu denominations -->
+        <combo key="denomination" text="Denomination" values="vaishnavism,shaivism,shaktism,smartism" values_searchable="true" />
+    </chunk>
+    <!-- shinto and the religions which don't have an own preset don't have denominations (yet) -->
+    <!-- end of religions and denominations --> 
+    <chunk id="voltage">
+        <combo key="voltage" text="Voltage in Volts (V)" values="1150000,765000,750000,735000,500000,450000,420000,400000,380000,350000,345000,330000,315000,300000,275000,238000,230000,225000,220000,200000,161000,154000,150000,138000,132000,120000,115000,110000,100000,90000,69000,66000,65000,63000,60000,55000,49000,45000,35000,33000,30000,22000,20000,15000,110000;20000" />
+    </chunk>
+    <chunk id="frequency">
+        <combo key="frequency" text="Frequency in Hertz (Hz)" values="0,16.67,16.7,25,50,60" length="5" values_sort="false" />
+    </chunk>
+    <chunk id="voltage_frequency">
+        <reference ref="voltage" />
+        <reference ref="frequency" />
+    </chunk>
+    <chunk id="transformer_voltage_frequency">
+        <combo key="voltage:primary" text="Primary voltage in Volts (V)" values="765000,750000,735000,500000,450000,420000,400000,380000,350000,345000,330000,315000,300000,275000,238000,230000,225000,220000,200000,161000,154000,150000,138000,132000,120000,115000,110000,100000,90000,69000,66000,65000,63000,60000,55000,49000,45000,35000,33000,30000,20000,15000" />
+        <combo key="voltage:secondary" text="Secondary voltage in Volts (V)" values="765000,750000,735000,500000,450000,420000,400000,380000,350000,345000,330000,315000,300000,275000,238000,230000,225000,220000,200000,161000,154000,150000,138000,132000,120000,115000,110000,100000,90000,69000,66000,65000,63000,60000,55000,49000,45000,35000,33000,30000,20000,15000" />
+        <combo key="voltage:tertiary" text="Tertiary voltage in Volts (V)" values="765000,750000,735000,500000,450000,420000,400000,380000,350000,345000,330000,315000,300000,275000,238000,230000,225000,220000,200000,161000,154000,150000,138000,132000,120000,115000,110000,100000,90000,69000,66000,65000,63000,60000,55000,49000,45000,35000,33000,30000,20000,15000" />
+        <reference ref="frequency" />
+    </chunk>
+    <chunk id="cables">
+        <combo key="cables" text="Amount of Cables" values="1,2,3,4,6,9,12" />
+    </chunk>
+    <chunk id="cables_circuits">
+        <reference ref="cables" />
+        <combo key="circuits" text="Amount of circuits" values="1,2,3,4" />
+    </chunk>
+    <chunk id="power_loc">
+        <combo key="location" text="Location" values="outdoor,indoor,underground,platform,roof" values_context="power" />
+    </chunk>
+    <chunk id="power_extra">
+        <reference ref="power_loc" />
+        <reference ref="voltage_frequency" />
+        <reference ref="ref_operator" />
+    </chunk>
+    <chunk id="power_line_extra">
+        <reference ref="cables_circuits" />
+        <reference ref="voltage_frequency" />
+    </chunk>
+    <chunk id="power_generator">
+        <link wiki="Tag:power=generator" />
+        <space />
+        <key key="power" value="generator" />
+        <reference ref="name_ref_operator" />
+        <text key="start_date" text="Start date" />
+    </chunk>
+    <chunk id="power_output">
+        <optional text="Output forms of energy:">
+            <combo key="generator:output:biogas" text="biogas" values="yes,2 W,3 kW,5 MW,7 GW" />
+            <combo key="generator:output:electricity" text="electricity" values="yes,2 W,3 kW,5 MW,7 GW" />
+            <combo key="generator:output:hot_water" text="hot water" values="yes,2 W,3 kW,5 MW,7 GW" />
+            <combo key="generator:output:hot_air" text="hot air" values="yes,2 W,3 kW,5 MW,7 GW" />
+            <combo key="generator:output:cold_water" text="cold water" values="yes,2 W,3 kW,5 MW,7 GW" />
+            <combo key="generator:output:cold_air" text="cold air" values="yes,2 W,3 kW,5 MW,7 GW" />
+            <combo key="generator:output:compressed_air" text="compressed air" values="yes,2 W,3 kW,5 MW,7 GW" />
+            <combo key="generator:output:steam" text="steam" values="yes,2 W,3 kW,5 MW,7 GW" />
+            <combo key="generator:output:vacuum" text="vacuum" values="yes,2 W,3 kW,5 MW,7 GW" />
+            <space />
+            <reference ref="voltage_frequency" />
+        </optional>
+    </chunk>
+    <chunk id="power_pole">
+        <text key="height" text="Height (meters)" length="7" />
+        <combo key="material" text="Material" values="concrete,metal,plastic,steel,stone,wood" />
+        <combo key="line_attachment" text="Line attachment" values="anchor,pin,pulley,suspension" values_context="power" />
+        <combo key="line_management" text="Line management" values="branch,cross,split,straight,termination,transition,transpose" values_context="Line management" />
+        <check key="location:transition" text="Location transition" disable_off="true" />
+        <reference ref="ref_operator" />
+    </chunk>
+    <chunk id="rating_phases">
+        <combo key="rating" text="Power rating (kVA/MVA)" values="2700 kVA,12500 kVA,15 MVA,50 MVA,100 MVA" />
+        <combo key="phases" text="Phases" values="1,3" length="1" />
+    </chunk>
+    <chunk id="optional_rating_phases">
+        <optional>
+            <reference ref="rating_phases" />
+        </optional>
+    </chunk>
+    <chunk id="optional_transformer_rating_phases_devices_windings">
+        <optional>
+            <reference ref="rating_phases" />
+            <combo key="devices" text="Number of devices" values="1,2,3,4" />
+            <combo key="windings" text="Number of windings" values="1,2,3,4" />
+            <!-- #16364: don't use simple "power" context to avoid conflict with "delta" used for power towers -->
+            <combo key="windings:configuration" text="Windings configuration" values="star,delta,open-delta,zigzag,open,scott,leblanc" values_context="power_windings" />
+        </optional>
+    </chunk>
+    <chunk id="telecom_medium">
+        <combo key="telecom:medium" text="Local loop type" values="copper,fibre,coaxial" />
+    </chunk>
+    <chunk id="optional_bridge">
+        <optional>
+            <text key="name" text="Name" />
+            <text key="bridge:name" text="Bridge name" />
+            <combo key="layer" text="Layer" values="5,4,3,2,1,0,-1,-2,-3,-4,-5" default="1" length="3" values_sort="false" />
+            <space />
+            <text key="maxspeed" text="Max. speed (km/h)" />
+            <text key="maxspeed:forward" text="Max. speed in way direction" />
+            <text key="maxspeed:backward" text="Max. speed opposed to way direction" />
+            <space />
+            <text key="maxweight" text="Max. weight (tonnes)" />
+            <combo key="incline" text="Incline" values="10%,-10%,10°,-10°,up,down" />
+            <text key="width" text="Width (meters)" />
+            <check key="toll" text="Toll" />
+        </optional>
+    </chunk>
+    <chunk id="waterway">
+        <combo key="layer" text="Layer" values="5,4,3,2,1,0,-1,-2,-3,-4,-5" length="3" values_sort="false" />
+        <check key="intermittent" text="Intermittent" disable_off="true" />
+        <check key="seasonal" text="Seasonal" disable_off="true" />
+        <check key="tidal" text="In the tidal range" disable_off="true" />
+        <combo key="tunnel" text="Tunnel" values="culvert,yes" />
+        <text key="width" text="Width (meters)" />
+    </chunk>
+    <chunk id="water_access">
+        <optional text="Water access rules:">
+            <combo key="ship" text="Ship" values="yes,designated,destination,delivery,permissive,private,no" values_sort="false" />
+            <combo key="boat" text="Boat" values="yes,designated,destination,delivery,permissive,private,no" values_sort="false" />
+            <combo key="motorboat" text="Motorboat" values="yes,designated,destination,delivery,permissive,private,no" values_sort="false" />
+            <combo key="canoe" text="Canoe" values="yes,designated,destination,delivery,permissive,private,no" values_sort="false" />
+        </optional>
+    </chunk>
+    <chunk id="operator_substance">
+        <text key="operator" text="Operator" />
+        <combo key="substance" text="Substance" values="water,gas,heat,oil,sewage" />
+    </chunk>
+    <chunk id="support">
+        <combo key="support" text="Support" values="pole,wall_mounted,billboard,ground" values_context="mounting/support" />
+    </chunk>
+    <chunk id="aerodrome">
+        <key key="aeroway" value="aerodrome" match="keyvalue" />
+        <text key="name" text="Name" />
+        <optional>
+            <text key="iata" text="IATA" />
+            <text key="icao" text="ICAO" />
+            <reference ref="wikipedia_wikidata" />
+        </optional>
+    </chunk>
+    <chunk id="car_brands">
+        <multiselect key="brand" text="Car brand" values="Alfa Romeo;Aston Martin;Audi;Bentley;BMW;Buick;Cadillac;Chevrolet;Chrysler;Citroën;Dacia;Daewoo;Daihatsu;Dodge;Ferrari;Fiat;Ford;GMC;Great Wall;Holden;Honda;Hyundai;Infiniti;Isuzu;Jaguar;Jeep;Kia;Lada;Lancia;Land Rover;Lexus;Lincoln;Lotus;Maserati;Mazda;Mercedes-Benz;Mini;Mitsubishi;Nissan;Opel;Peugeot;Porsche;Renault;Saab;Seat;Škoda;Smart;SsangYong;Subaru;Suzuki;Tata;Toyota;Vauxhall;Volkswagen;Volvo" values_no_i18n="true" />
+    </chunk>
+    <chunk id="motorcycle_brands">
+        <multiselect key="brand" text="Motorcycle brand" values="Aprillia;BMW;Ducati;Gilera;Harley-Davidson;Honda;Kawasaki;KTM;Kymco;Piaggio;Peugeot;Piaggio;Suzuki;Triumph;Vespa;Yamaha" values_no_i18n="true" />
+    </chunk>
+    <chunk id="walking_routes_roles">
+        <roles>
+            <role key="" text="route segment" requisite="required" type="way,closedway,relation" member_expression="highway|route=ferry"/>
+            <role key="alternative" text="alternative segment" requisite="optional" type="way,closedway,relation"/>
+            <role key="approach" text="approach segment" requisite="optional" type="way,closedway,relation"/>
+            <role key="excursion" text="excursion segment" requisite="optional" type="way,closedway,relation"/>
+            <role key="connection" text="connection segment" requisite="optional" type="way,closedway,relation"/>
+            <role key="" text="infrastructure" requisite="optional" type="node,closedway" member_expression="tourism OR amenity"/>
+            <role key="" text="natural" requisite="optional" type="node,closedway" member_expression="natural=peak OR natural=volcano OR mountain_pass=yes OR natural=water OR tourism=viewpoint OR amenity=drinking_water OR natural=spring OR place=locality"/>
+            <role key="guidepost" text="guidepost" requisite="optional" type="node" member_expression="information=guidepost"/>
+        </roles>
+    </chunk>
+    <chunk id="route_segment_roles">
+        <role key="" text="route segment" requisite="optional" type="way,closedway" member_expression="highway|route=ferry|leisure=track"/>
+        <role key="forward" text="forward segment" requisite="optional" type="way,closedway" />
+        <role key="backward" text="backward segment" requisite="optional" type="way,closedway" />
+        <role key="guidepost" text="guidepost" requisite="optional" type="node" member_expression="information=guidepost"/>
+    </chunk>
+    <chunk id="route_start_stop_roles">
+        <role key="start" text="start endpoint" requisite="optional" type="node" />
+        <role key="stop" text="stop endpoint" requisite="optional" type="node" />
+        <role key="start_stop" text="start and stop endpoint" requisite="optional" type="node" />
+    </chunk>
+    <chunk id="public_transport_route_optionals">
+        <text key="from" text="From (initial stop)" />
+        <text key="to" text="To (terminal stop)" />
+        <text key="via" text="Via (intermediate stops)" />
+        <text key="operator" text="Operator" />
+        <text key="network" text="Network" />
+        <text key="description" text="Description" />
+        <combo key="colour" text="Color (HTML name or hexadecimal code)" values_context="color" values="black,blue,brown,gray,green,orange,purple,red,silver,white,yellow,#CD853F" />
+        <reference ref="oh" />
+        <combo key="duration" text="Duration (M, MM, HH:MM, or HH:MM:SS)" values="5,10,15,20,30,60,120,10:30,00:02:30" values_no_i18n="true" />
+        <combo key="interval" text="Interval (M, MM, HH:MM, or HH:MM:SS)" values="5,10,15,20,30,60,120,10:30,00:02:30" values_no_i18n="true" />
+        <reference ref="fee" />
+        <text key="website" text="Website" />
+    </chunk>
+    <chunk id="climbing_styles">
+        <label text="Climbing styles:" />
+        <checkgroup columns="2">
+            <check key="climbing:boulder" text="Boulders" />
+            <check key="climbing:sport" text="Sport climbing" />
+            <check key="climbing:toprope" text="Top rope (approach at the route top + letting the rope down)" />
+            <check key="climbing:trad" text="Traditional climbing (no fixed anchors)" />
+            <check key="climbing:multipitch" text="Multi-pitch climbing" />
+            <check key="climbing:ice" text="Ice climbing" />
+            <check key="climbing:mixed" text="Mixed climbing" />
+            <check key="climbing:deepwater" text="Deep Water Soloing" />
+        </checkgroup>
+    </chunk>
+    <chunk id="climbing_optional_attributes">
+        <optional>
+            <combo key="climbing:orientation" text="Orientation" values="N,NE,E,SE,S,SW,W,NW" values_no_i18n="true" values_sort="false"/>
+            <combo key="climbing:quality" text="Rock/ice quality" values="fragile,medium,solid" />
+            <combo key="climbing:rock" text="Rock type" values="limestone,sandstone,granite,basalt,slate" />
+            <check key="climbing:summit_log" text="Summit/route log/register" />
+            <check key="indoor" text="Climbing routes indoor" />
+            <check key="outdoor" text="Climbing routes outdoor" />
+            <text key="website" text="Official web site (e.g. operator)" />
+            <text key="url" text="Unofficial web site" />
+            <combo key="opening_hours" text="Opening Hours" delimiter="|" values="24/7|sunset-sunrise open; sunrise-sunset closed|Mar-Jun closed; Jul-Feb Mo-Su,PH sunrise-sunset|Mo-Fr 15:00-22:00; Sa-Su 11:00-22:00" values_no_i18n="true" values_sort="false" />
+            <combo key="fee" text="Fee" values="yes,no,Sa-Su 08:00-20:00"/>
+            <reference ref="POI_access" />
+        </optional>
+    </chunk>
+    <chunk id="communication">
+        <space />
+        <label text="Communication type:" />
+        <checkgroup columns="3">
+            <check key="communication:mobile_phone" text="Mobile phone" />
+            <check key="communication:television" text="Television" />
+            <check key="communication:radio" text="Radio" />
+            <check key="communication:microwave" text="Microwave" />
+            <check key="communication:gsm-r" text="GSM-R" />
+        </checkgroup>
+    </chunk>
+    <!-- Link chunks -->
+    <chunk id="link_contact_address">
+        <preset_link preset_name="Contact (Common Schema)" />
+        <preset_link preset_name="Address" />
+    </chunk>
+    <chunk id="link_contact_address_payment">
+        <preset_link preset_name="Contact (Common Schema)" />
+        <preset_link preset_name="Address" />
+        <preset_link preset_name="Payment Methods" />
+    </chunk>
+    <chunk id="link_road_access_restrictions">
+        <preset_link preset_name="Road Restrictions" />
+        <preset_link preset_name="Access Restrictions" />
+    </chunk>
+  <!-- Groups -->
+  <group name="Highways Bangladesh " icon="img/bd_.png">
+    <group name="RHD/LGED/LGI" icon="presets/transport/way/way_motorway.svg">
+        <item name="AH" icon="presets/transport/way/way_motorway.svg" type="way" preset_name_label="true">
+            <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <space />
+                <label text="&lt;html&gt;&lt;b&gt;Highways connecting National capital with Divisional HQs or sea ports or land ports or Asian Highway&lt;/b&gt;&lt;/html&gt;"/>
+                <space />
+            <key key="highway" value="motorway" />
+            <text key="ref" text="Reference" />
+            <check key="noref" text="Street has no reference" disable_off="true" />
+            <optional>
+                <text key="name" text="Name" />
+                <check key="noname" text="Street has no name" disable_off="true" />
+                <reference ref="highway_base" />
+                <text key="destination" text="Destination" />
+                <text key="destination:ref" text="Destination reference" />
+                <text key="width" text="Width (meters)" />
+                <space />
+                <reference ref="highway_yesno" />
+                <checkgroup columns="4">
+                    <check key="oneway" text="Oneway" default="on" />
+                    <check key="lit" text="Lit" />
+                    <check key="toll" text="Toll" />
+                </checkgroup>
+                <reference ref="placement_shoulder" />
+            </optional>
+            <reference ref="link_road_access_restrictions" />
+        </item> <!-- Motorway -->
+        <item name="N" icon="presets/transport/way/way_trunk.svg" type="way" preset_name_label="true">
+            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <space />
+                <label text="&lt;html&gt;&lt;b&gt;Highways connecting National capital with Divisional HQs or sea ports or land ports&lt;/b&gt;&lt;/html&gt;"/>
+                <space />
+            <key key="highway" value="trunk" />
+            <text key="ref" text="Reference" />
+            <check key="noref" text="Street has no reference" disable_off="true" />
+            <optional>
+                <text key="name" text="Name" />
+                <check key="noname" text="Street has no name" disable_off="true" />
+                <reference ref="highway_base" />
+                <text key="destination" text="Destination" />
+                <text key="destination:ref" text="Destination reference" />
+                <text key="width" text="Width (meters)" />
+                <space />
+                <reference ref="highway_yesno" />
+                <checkgroup columns="4">
+                    <check key="oneway" text="Oneway" default="on" />
+                    <check key="lit" text="Lit" />
+                    <check key="toll" text="Toll" />
+                    <check key="motorroad" text="Motorroad" default="on" />
+                </checkgroup>
+                <reference ref="placement_shoulder" />
+            </optional>
+            <reference ref="link_road_access_restrictions" />
+        </item> <!-- Trunk -->
+        <item name="R" icon="presets/transport/way/way_primary.svg" type="way,closedway" preset_name_label="true">
+            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <space />
+                <label text="&lt;html&gt;&lt;b&gt;Highways connecting District HQs or main river or land ports or with each other not connected by national Highways.&lt;/b&gt;&lt;/html&gt;"/>
+                <space />
+            <key key="highway" value="primary" />
+            <text key="ref" text="Reference" />
+            <check key="noref" text="Street has no reference" disable_off="true" />
+            <optional>
+                <text key="name" text="Name" />
+                <check key="noname" text="Street has no name" disable_off="true" />
+                <reference ref="highway_base" />
+                <reference ref="highway_yesno_incline_oneway_lit_width_busbay_sidewalk" />
+                <checkgroup columns="4">
+                    <check key="motorroad" text="Motorroad" />
+                    <check key="narrow" text="Narrow" disable_off="true" />
+                    <check key="trolley_wire" text="Overhead trolley wires" />
+                </checkgroup>
+                <reference ref="placement_shoulder" />
+            </optional>
+            <reference ref="link_road_access_restrictions" />
+        </item> <!-- Primary -->
+        <item name="Z" icon="presets/transport/way/way_secondary.svg" type="way,closedway" preset_name_label="true">
+            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <space />
+            <label text="&lt;html&gt;&lt;b&gt;Roads connecting District HQ/s with Upazila HQ/s or connecting one Upazila HQ to another Upazila HQ by a single main connection with National/Regional Highway, through shortest distance/ route.&lt;/b&gt;&lt;/html&gt;"/>
+                <space />
+            <key key="highway" value="secondary" />
+            <text key="ref" text="Reference" />
+            <check key="noref" text="Street has no reference" disable_off="true" />
+            <optional>
+                <text key="name" text="Name" />
+                <check key="noname" text="Street has no name" disable_off="true" />
+                <reference ref="highway_base" />
+                <reference ref="highway_yesno_incline_oneway_lit_width_busbay_sidewalk" />
+                <checkgroup columns="2">
+                    <check key="narrow" text="Narrow" disable_off="true" />
+                    <check key="trolley_wire" text="Overhead trolley wires" />
+                </checkgroup>
+                <reference ref="placement_shoulder" />
+            </optional>
+            <reference ref="link_road_access_restrictions" />
+        </item> <!-- Secondary -->
+        <item name="B, R1" icon="presets/transport/way/way_tertiary.svg" type="way,closedway" preset_name_label="true">
+            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <space />
+            <label text="&lt;html&gt;&lt;b&gt;* Roads connecting Upazila HQ/s with Growth Center/s or one Growth Center with another Growth Center by a single main connection or connecting Growth Center to Higher Road System,&lt;/b&gt;&lt;/html&gt;"/>
+            <label text="&lt;html&gt;&lt;b&gt;* Through shortest distance/route.(Former Feeder Road Type-B) Roads connecting union HQ/s with Upazila HQs, Growth Centers or local markets or with each other. (Former Rural Road Class-1 (R1)&lt;/b&gt;&lt;/html&gt;"/>
+                <space />
+            <key key="highway" value="tertiary" />
+            <text key="ref" text="Reference" />
+            <check key="noref" text="Street has no reference" disable_off="true" />
+            <optional>
+                <text key="name" text="Name" />
+                <check key="noname" text="Street has no name" disable_off="true" />
+                <reference ref="highway_base" />
+                <reference ref="highway_yesno_incline_oneway_lit_width_busbay_sidewalk" />
+                <checkgroup columns="2">
+                    <check key="narrow" text="Narrow" disable_off="true" />
+                    <check key="trolley_wire" text="Overhead trolley wires" />
+                </checkgroup>
+                <reference ref="placement_shoulder" />
+            </optional>
+            <reference ref="link_road_access_restrictions" />
+        </item> <!-- Tertiary -->
+        <item name="R2, R3" icon="presets/transport/way/way_unclassified.svg" type="way,closedway" preset_name_label="true">
+            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <space/>
+            <label text="&lt;html&gt;&lt;b&gt;* Roads connecting Villages with Union HQs, local markets, farms and ghats or with each other. (Former Rural Road Class-2 (R2)&lt;/b&gt;&lt;/html&gt;"/>
+            <label text="&lt;html&gt;&lt;b&gt;* Roads within a Village. (Former Rural Road Class-3 (R3)&lt;/b&gt;&lt;/html&gt;"/>
+
+                <space />
+            <key key="highway" value="unclassified" />
+            <optional>
+                <text key="name" text="Name" />
+                <check key="noname" text="Street has no name" disable_off="true" />
+                <text key="ref" text="Reference" />
+                <check key="noref" text="Street has no reference" disable_off="true" />
+                <reference ref="highway_base" />
+                <reference ref="highway_yesno_incline_oneway_lit_width_busbay_sidewalk" />
+                <checkgroup columns="3">
+                    <check key="narrow" text="Narrow" disable_off="true" />
+                    <check key="trolley_wire" text="Overhead trolley wires" />
+                    <check key="passing_places" text="Passing Places" />
+                </checkgroup> 
+                <reference ref="placement_shoulder" />
+            </optional>
+            <reference ref="link_road_access_restrictions" />
+        </item> <!-- Unclassified -->
+    </group> <!-- Streets -->
+    <group name="Residential Road" icon="presets/transport/way/way_residential.svg">
+        <item name="Residential" icon="presets/transport/way/way_residential.svg" type="way,closedway" preset_name_label="true">
+                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <space />
+                <key key="highway" value="residential" />
+                <text key="name" text="Name" />
+                <check key="noname" text="Street has no name" disable_off="true" />
+                <optional>
+                    <text key="ref" text="Reference" />
+                    <reference ref="highway_base" />
+                    <reference ref="highway_yesno" />
+                    <checkgroup columns="4">
+                        <check key="oneway" text="Oneway" />
+                        <check key="oneway:bicycle" text="Oneway for bicycle" />
+                        <check key="lit" text="Lit" />
+                    </checkgroup>
+                    <text key="width" text="Width (meters)" />
+                    <combo key="bus_bay" text="Bus bay" values="both,left,right" />
+                    <combo key="sidewalk" text="Sidewalk" values="both,left,right,no,separate" values_context="sidewalk" />
+                    <checkgroup columns="2">
+                        <check key="narrow" text="Narrow" disable_off="true" />
+                        <check key="trolley_wire" text="Overhead trolley wires" />
+                    </checkgroup>
+                </optional>
+                <reference ref="link_road_access_restrictions" />
+            </item> <!-- Residential -->
+            <item name="Living Street" icon="presets/transport/way/way_living_street.svg" type="way,closedway" preset_name_label="true">
+                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <space />
+                <key key="highway" value="living_street" />
+                <text key="name" text="Name" />
+                <check key="noname" text="Street has no name" disable_off="true" />
+                <optional>
+                    <combo key="lanes" text="Lanes" values="1,2,3" length="3" />
+                    <combo key="layer" text="Layer" values="5,4,3,2,1,0,-1,-2,-3,-4,-5" length="3" values_sort="false" />
+                    <reference ref="surface_smoothness" />
+                    <reference ref="highway_yesno_incline_oneway_lit_width_busbay_sidewalk" />
+                    <checkgroup columns="2">
+                        <check key="narrow" text="Narrow" disable_off="true" />
+                        <check key="trolley_wire" text="Overhead trolley wires" />
+                    </checkgroup>
+                </optional>
+                <reference ref="link_road_access_restrictions" />
+            </item> <!-- Living Street -->
+        <item name="Service" icon="presets/transport/way/way_service.svg" type="way,closedway" preset_name_label="true">
+                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <space />
+                <key key="highway" value="service" />
+                <combo key="service" text="Service way type" values="alley,driveway,parking_aisle,drive-through,emergency_access" />
+                <optional>
+                    <text key="name" text="Name" />
+                    <space />
+                    <reference ref="highway_base" />
+                    <reference ref="highway_yesno_incline_oneway_lit_width_busbay_sidewalk" />
+                    <check key="passing_places" text="Passing Places" />
+                </optional>
+                <reference ref="link_road_access_restrictions" />
+            </item> <!-- Service -->
+        
+    </group> <!-- Ways -->
+    <group name="Rural Road" icon="presets/transport/way/path.svg">
+        <item name="Track" icon="presets/transport/way/track.svg" type="way,closedway" preset_name_label="true">
+                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <space />
+                <combo key="tracktype" text="Tracktype" values_searchable="true" values_sort="false">
+                    <list_entry value="grade1" icon="presets/transport/way/tracktype_grade1.svg" short_description="Solid: paved or heavily compacted hardcore surface" />
+                    <list_entry value="grade2" icon="presets/transport/way/tracktype_grade2.svg" short_description="Mostly Solid: gravel/rock with some soft material mixed in" />
+                    <list_entry value="grade3" icon="presets/transport/way/tracktype_grade3.svg" short_description="Even mixture of hard and soft materials" />
+                    <list_entry value="grade4" icon="presets/transport/way/tracktype_grade4.svg" short_description="Mostly Soft: soil/sand/grass with some hard material mixed in" />
+                    <list_entry value="grade5" icon="presets/transport/way/tracktype_grade5.svg" short_description="Soft: soil/sand/grass" />
+                </combo>
+                <key key="highway" value="track" />
+                <optional>
+                    <reference ref="name_layer" />
+                    <reference ref="surface_smoothness" />
+                    <reference ref="highway_yesno_incline_oneway_lit_width" />
+                    <combo key="mtb:scale" text="MTB Scale" values="0,1,2,3,4,5" />
+                    <reference ref="highway_access" />
+                    <combo key="vehicle" text="All vehicles" values="yes,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" />
+                    <combo key="motor_vehicle" text="Motor vehicles" values="yes,official,designated,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" />
+                    <combo key="motorcycle" text="Motorcycle" values="yes,official,designated,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" />
+                    <combo key="motorcar" text="Motorcar" values="yes,official,designated,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" />
+                    <combo key="horse" text="Horse" values="yes,official,designated,permissive,destination,delivery,private,no" values_sort="false" />
+                </optional>
+                <reference ref="link_road_access_restrictions" />
+        </item> <!-- Track -->
+        <item name="Footway" icon="presets/transport/way/dedicated_footway.svg" type="way,closedway" preset_name_label="true">
+                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <key key="highway" value="footway" />
+                <optional>
+                    <combo key="footway" text="Type" values="access_aisle,crossing,sidewalk" values_context="footway" />
+                    <reference ref="name_layer" />
+                    <reference ref="surface_smoothness" />
+                    <reference ref="highway_yesno_incline_oneway_lit_width" />
+                    <check key="segregated" text="Segregated" />
+                    <reference ref="wheelchair" />
+                    <space />
+                    <label text="Depending on the country, several access tags are implied and do not need to be set." />
+                    <label text="Globally, `foot=designated` is implied." />
+                    <combo key="bicycle" text="Bicycle" values="yes,designated,permissive,destination,delivery,private,no" values_sort="false" />
+                    <combo key="ski" text="Ski" values="yes,official,designated,permissive,private,no" values_sort="false" />
+                    <combo key="snowmobile" text="Snowmobile" values="yes,official,designated,permissive,destination,delivery,private,no" values_sort="false" />
+                    <combo key="dog" text="Dog" values="yes,leashed,unleashed,official,designated,permissive,private,no" values_sort="false" match="key" />
+                    <combo key="horse" text="Horse" values="yes,official,designated,permissive,destination,delivery,private,no" values_sort="false" />
+                    <combo key="vehicle" text="All vehicles" values="yes,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" />
+                    <combo key="motor_vehicle" text="Motor vehicles" values="yes,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" match="key" />
+                </optional>
+                <reference ref="link_road_access_restrictions" />
+        </item> <!-- Footway -->
+        <item name="Path" icon="presets/transport/way/path.svg" type="way,closedway" preset_name_label="true">
+                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <key key="highway" value="path" />
+                <optional>
+                    <reference ref="name_layer" />
+                    <reference ref="surface_smoothness" />
+                    <reference ref="highway_yesno_incline_oneway_lit_width" />
+                    <combo key="sac_scale" text="SAC Scale" values_searchable="true" values_sort="false">
+                        <list_entry value="hiking" display_value="T1 - hiking trail" short_description="Trail well cleared. Area flat or slightly sloped, no fall hazard" />
+                        <list_entry value="mountain_hiking" display_value="T2 - mountain hiking trail" short_description="Trail with continuous line and balanced ascent. Terrain partially steep, fall hazard possible" />
+                        <list_entry value="demanding_mountain_hiking" display_value="T3 - difficult, exposed hiking trail" short_description="exposed sites may be secured with ropes or chains, possible need to use hands for balance. Partly exposed sites with fall hazard, scree, pathless jagged rocks" />
+                        <list_entry value="alpine_hiking" display_value="T4 - difficult, exposed, steep alpine trail" short_description="sometimes need for hand use to get ahead. Terrain quite exposed, precarious grassy acclivities, jagged rocks, facile snow-free glaciers" />
+                        <list_entry value="demanding_alpine_hiking" display_value="T5 - difficult alpine trail with climbing" short_description="single plainly climbing up to second grade. Exposed, demanding terrain, jagged rocks, few dangerous glacier and snow" />
+                        <list_entry value="difficult_alpine_hiking" display_value="T6 - hazardous alpine trail with climbing" short_description="climbing up to second grade. Often very exposed, precarious jagged rocks, glacier with danger to slip and fall" />
+                    </combo>
+                    <combo key="mtb:scale" text="MTB Scale" values="0,1,2,3,4,5" />
+                    <combo key="trail_visibility" text="Visibility" values="excellent,good,intermediate,bad,horrible,no" values_context="trail_visibility" values_sort="false" />
+                    <check key="segregated" text="Segregated" />
+                    <combo key="foot" text="Foot" values="yes,official,designated,permissive,destination,delivery,private,no" values_sort="false" />
+                    <reference ref="wheelchair" />
+                    <combo key="bicycle" text="Bicycle" values="yes,official,designated,permissive,destination,delivery,private,no" values_sort="false" />
+                    <reference ref="path_access_modes" />
+                </optional>
+                <reference ref="link_road_access_restrictions" />
+        </item> <!-- Path -->
+        <item name="Road (Unknown Type)" icon="presets/transport/way/way_road.svg" type="way,closedway" preset_name_label="true">
+        <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <key key="highway" value="road" />
+                <optional>
+                    <text key="name" text="Name" />
+                    <space />
+                    <reference ref="highway_base" />
+                    <reference ref="highway_yesno_incline_oneway_lit_width_busbay_sidewalk" />
+                    <check key="trolley_wire" text="Overhead trolley wires" />
+                </optional>
+                <reference ref="link_road_access_restrictions" />
+        </item> <!-- Road (Unknown Type) -->
+        
+        </group> <!-- Traffic Calming -->
+        
+    
+    
+  </group> <!-- Highways -->
+  
+</presets>

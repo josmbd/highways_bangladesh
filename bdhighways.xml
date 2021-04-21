@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0" author="AtikurRahmanAtik"
-shortdescription="Highway Tag_BD"
-description="Tag easily highways from Bangladesh. Begin to be localizated."
-version="1.2021-04-20">
-
-
-    <!-- Item chunks -->
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0" author="Atikur Rahman"
+  version="1.0.2_2021-04-21"
+  shortdescription="BD_Highway_Tag"
+  description="Tag easily highways from Bangladesh. Begin to be localizated.">
     <chunk id="surface">
         <combo key="surface" text="Surface" values="paved,unpaved,asphalt,concrete,concrete:plates,concrete:lanes,paving_stones,sett,cobblestone,grass_paver,compacted,fine_gravel,gravel,pebblestone,ground,mud,sand,grass,wood,metal" />
     </chunk>
@@ -341,7 +338,7 @@ version="1.2021-04-20">
         <combo key="denomination" text="Denomination" values="ibadi,nondenominational,shia,sunni" values_searchable="true" />
     </chunk>
     <chunk id="jewish_denominations"> <!-- jewish denominations -->
-        <combo key="denomination" text="Denomination" values="orthodox,conservative,nondenominational,reform" values_context="jewish" values_searchable="true" /> <!-- values_context because of orthodox, #9629 -->
+        <combo key="denomination" text="Denomination" values="orthodox,conservative,nondenominational,reform" values_context="jewish" values_searchable="true" /> <!-- values_context because of orthodox,-->
     </chunk>
     <chunk id="buddhist_denominations"> <!-- buddhist denominations -->
         <combo key="denomination" text="Denomination" values="tibetan,theravada,mahayana,vajrayana" values_searchable="true" />
@@ -430,7 +427,7 @@ version="1.2021-04-20">
             <reference ref="rating_phases" />
             <combo key="devices" text="Number of devices" values="1,2,3,4" />
             <combo key="windings" text="Number of windings" values="1,2,3,4" />
-            <!-- #16364: don't use simple "power" context to avoid conflict with "delta" used for power towers -->
+            <!--  don't use simple "power" context to avoid conflict with "delta" used for power towers -->
             <combo key="windings:configuration" text="Windings configuration" values="star,delta,open-delta,zigzag,open,scott,leblanc" values_context="power_windings" />
         </optional>
     </chunk>
@@ -521,7 +518,7 @@ version="1.2021-04-20">
         <text key="operator" text="Operator" />
         <text key="network" text="Network" />
         <text key="description" text="Description" />
-        <combo key="colour" text="Color (HTML name or hexadecimal code)" values_context="color" values="black,blue,brown,gray,green,orange,purple,red,silver,white,yellow,#CD853F" />
+        <combo key="colour" text="Color (HTML name or hexadecimal code)" values_context="color" values="black,blue,brown,gray,green,orange,purple,red,silver,white,yellow" />
         <reference ref="oh" />
         <combo key="duration" text="Duration (M, MM, HH:MM, or HH:MM:SS)" values="5,10,15,20,30,60,120,10:30,00:02:30" values_no_i18n="true" />
         <combo key="interval" text="Interval (M, MM, HH:MM, or HH:MM:SS)" values="5,10,15,20,30,60,120,10:30,00:02:30" values_no_i18n="true" />
@@ -581,11 +578,10 @@ version="1.2021-04-20">
         <preset_link preset_name="Road Restrictions" />
         <preset_link preset_name="Access Restrictions" />
     </chunk>
-  <!-- Groups -->
-  <group name="Highways Bangladesh " icon="img/bd_.png">
+    <group name="Highways Bangladesh " icon="img/bd_.png">
     <group name="RHD/LGED/LGI" icon="presets/transport/way/way_motorway.svg">
         <item name="AH" icon="presets/transport/way/way_motorway.svg" type="way" preset_name_label="true">
-            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
                 <space />
                 <label text="&lt;html&gt;&lt;b&gt;Highways connecting National capital with Divisional HQs or sea ports or land ports or Asian Highway&lt;/b&gt;&lt;/html&gt;"/>
                 <space />
@@ -594,6 +590,7 @@ version="1.2021-04-20">
             <check key="noref" text="Street has no reference" disable_off="true" />
             <optional>
                 <text key="name" text="Name" />
+                <text key="ah" text="AH"/>
                 <check key="noname" text="Street has no name" disable_off="true" />
                 <reference ref="highway_base" />
                 <text key="destination" text="Destination" />
@@ -611,11 +608,12 @@ version="1.2021-04-20">
             <reference ref="link_road_access_restrictions" />
         </item> <!-- Motorway -->
         <item name="N" icon="presets/transport/way/way_trunk.svg" type="way" preset_name_label="true">
-            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
             <space />
                 <label text="&lt;html&gt;&lt;b&gt;Highways connecting National capital with Divisional HQs or sea ports or land ports&lt;/b&gt;&lt;/html&gt;"/>
                 <space />
             <key key="highway" value="trunk" />
+            <text key="n" text="N"/>
             <text key="ref" text="Reference" />
             <check key="noref" text="Street has no reference" disable_off="true" />
             <optional>
@@ -638,11 +636,12 @@ version="1.2021-04-20">
             <reference ref="link_road_access_restrictions" />
         </item> <!-- Trunk -->
         <item name="R" icon="presets/transport/way/way_primary.svg" type="way,closedway" preset_name_label="true">
-            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
             <space />
                 <label text="&lt;html&gt;&lt;b&gt;Highways connecting District HQs or main river or land ports or with each other not connected by national Highways.&lt;/b&gt;&lt;/html&gt;"/>
                 <space />
             <key key="highway" value="primary" />
+            <text key="r" text="R"/>
             <text key="ref" text="Reference" />
             <check key="noref" text="Street has no reference" disable_off="true" />
             <optional>
@@ -660,11 +659,12 @@ version="1.2021-04-20">
             <reference ref="link_road_access_restrictions" />
         </item> <!-- Primary -->
         <item name="Z" icon="presets/transport/way/way_secondary.svg" type="way,closedway" preset_name_label="true">
-            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
             <space />
             <label text="&lt;html&gt;&lt;b&gt;Roads connecting District HQ/s with Upazila HQ/s or connecting one Upazila HQ to another Upazila HQ by a single main connection with National/Regional Highway, through shortest distance/ route.&lt;/b&gt;&lt;/html&gt;"/>
                 <space />
             <key key="highway" value="secondary" />
+            <text key="z" text="Z"/>
             <text key="ref" text="Reference" />
             <check key="noref" text="Street has no reference" disable_off="true" />
             <optional>
@@ -681,12 +681,13 @@ version="1.2021-04-20">
             <reference ref="link_road_access_restrictions" />
         </item> <!-- Secondary -->
         <item name="B, R1" icon="presets/transport/way/way_tertiary.svg" type="way,closedway" preset_name_label="true">
-            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
             <space />
             <label text="&lt;html&gt;&lt;b&gt;* Roads connecting Upazila HQ/s with Growth Center/s or one Growth Center with another Growth Center by a single main connection or connecting Growth Center to Higher Road System,&lt;/b&gt;&lt;/html&gt;"/>
             <label text="&lt;html&gt;&lt;b&gt;* Through shortest distance/route.(Former Feeder Road Type-B) Roads connecting union HQ/s with Upazila HQs, Growth Centers or local markets or with each other. (Former Rural Road Class-1 (R1)&lt;/b&gt;&lt;/html&gt;"/>
                 <space />
             <key key="highway" value="tertiary" />
+            <text key="b_r1" text="B/R1"/>
             <text key="ref" text="Reference" />
             <check key="noref" text="Street has no reference" disable_off="true" />
             <optional>
@@ -703,13 +704,13 @@ version="1.2021-04-20">
             <reference ref="link_road_access_restrictions" />
         </item> <!-- Tertiary -->
         <item name="R2, R3" icon="presets/transport/way/way_unclassified.svg" type="way,closedway" preset_name_label="true">
-            <link href="https://arahmandc.github.io/osmbdtag/test" />
+            <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
             <space/>
             <label text="&lt;html&gt;&lt;b&gt;* Roads connecting Villages with Union HQs, local markets, farms and ghats or with each other. (Former Rural Road Class-2 (R2)&lt;/b&gt;&lt;/html&gt;"/>
             <label text="&lt;html&gt;&lt;b&gt;* Roads within a Village. (Former Rural Road Class-3 (R3)&lt;/b&gt;&lt;/html&gt;"/>
-
                 <space />
             <key key="highway" value="unclassified" />
+            <text key="r2_r3" text="R2/R3"/>
             <optional>
                 <text key="name" text="Name" />
                 <check key="noname" text="Street has no name" disable_off="true" />
@@ -725,11 +726,11 @@ version="1.2021-04-20">
                 <reference ref="placement_shoulder" />
             </optional>
             <reference ref="link_road_access_restrictions" />
-        </item> <!-- Unclassified -->
-    </group> <!-- Streets -->
+        </item>
+    </group>
     <group name="Residential Road" icon="presets/transport/way/way_residential.svg">
         <item name="Residential" icon="presets/transport/way/way_residential.svg" type="way,closedway" preset_name_label="true">
-                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
                 <space />
                 <key key="highway" value="residential" />
                 <text key="name" text="Name" />
@@ -752,9 +753,9 @@ version="1.2021-04-20">
                     </checkgroup>
                 </optional>
                 <reference ref="link_road_access_restrictions" />
-            </item> <!-- Residential -->
+            </item>
             <item name="Living Street" icon="presets/transport/way/way_living_street.svg" type="way,closedway" preset_name_label="true">
-                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
                 <space />
                 <key key="highway" value="living_street" />
                 <text key="name" text="Name" />
@@ -770,9 +771,9 @@ version="1.2021-04-20">
                     </checkgroup>
                 </optional>
                 <reference ref="link_road_access_restrictions" />
-            </item> <!-- Living Street -->
+            </item>
         <item name="Service" icon="presets/transport/way/way_service.svg" type="way,closedway" preset_name_label="true">
-                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
                 <space />
                 <key key="highway" value="service" />
                 <combo key="service" text="Service way type" values="alley,driveway,parking_aisle,drive-through,emergency_access" />
@@ -784,12 +785,11 @@ version="1.2021-04-20">
                     <check key="passing_places" text="Passing Places" />
                 </optional>
                 <reference ref="link_road_access_restrictions" />
-            </item> <!-- Service -->
-        
-    </group> <!-- Ways -->
+            </item>
+    </group>
     <group name="Rural Road" icon="presets/transport/way/path.svg">
         <item name="Track" icon="presets/transport/way/track.svg" type="way,closedway" preset_name_label="true">
-                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
                 <space />
                 <combo key="tracktype" text="Tracktype" values_searchable="true" values_sort="false">
                     <list_entry value="grade1" icon="presets/transport/way/tracktype_grade1.svg" short_description="Solid: paved or heavily compacted hardcore surface" />
@@ -812,9 +812,9 @@ version="1.2021-04-20">
                     <combo key="horse" text="Horse" values="yes,official,designated,permissive,destination,delivery,private,no" values_sort="false" />
                 </optional>
                 <reference ref="link_road_access_restrictions" />
-        </item> <!-- Track -->
+        </item>
         <item name="Footway" icon="presets/transport/way/dedicated_footway.svg" type="way,closedway" preset_name_label="true">
-                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
                 <key key="highway" value="footway" />
                 <optional>
                     <combo key="footway" text="Type" values="access_aisle,crossing,sidewalk" values_context="footway" />
@@ -835,9 +835,9 @@ version="1.2021-04-20">
                     <combo key="motor_vehicle" text="Motor vehicles" values="yes,destination,delivery,permissive,private,agricultural,forestry,no" values_sort="false" match="key" />
                 </optional>
                 <reference ref="link_road_access_restrictions" />
-        </item> <!-- Footway -->
+        </item>
         <item name="Path" icon="presets/transport/way/path.svg" type="way,closedway" preset_name_label="true">
-                <link href="https://arahmandc.github.io/osmbdtag/test" />
+                <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
                 <key key="highway" value="path" />
                 <optional>
                     <reference ref="name_layer" />
@@ -860,9 +860,9 @@ version="1.2021-04-20">
                     <reference ref="path_access_modes" />
                 </optional>
                 <reference ref="link_road_access_restrictions" />
-        </item> <!-- Path -->
+        </item>
         <item name="Road (Unknown Type)" icon="presets/transport/way/way_road.svg" type="way,closedway" preset_name_label="true">
-        <link href="https://arahmandc.github.io/osmbdtag/test" />
+                 <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />
                 <key key="highway" value="road" />
                 <optional>
                     <text key="name" text="Name" />
@@ -872,12 +872,7 @@ version="1.2021-04-20">
                     <check key="trolley_wire" text="Overhead trolley wires" />
                 </optional>
                 <reference ref="link_road_access_restrictions" />
-        </item> <!-- Road (Unknown Type) -->
-        
-        </group> <!-- Traffic Calming -->
-        
-    
-    
-  </group> <!-- Highways -->
-  
+        </item>
+        </group>
+    </group>
 </presets>

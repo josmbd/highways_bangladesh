@@ -580,7 +580,7 @@
         <preset_link preset_name="Road Restrictions" />
         <preset_link preset_name="Access Restrictions" />
     </chunk>
-    <group name="Highways Bangladesh " icon="img/bd_.png">
+    <group name="Highways of Bangladesh " icon="bd_.png">
     <group name="RHD/LGED/LGI" icon="presets/transport/way/way_motorway.svg">
         <item name="AH" icon="presets/transport/way/way_motorway.svg" type="way" preset_name_label="true">
             <link wiki="Proposed_Tagging_Standard_for_Bangladesh" />

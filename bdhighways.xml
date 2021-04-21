@@ -2,7 +2,9 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0" author="Atikur Rahman"
   version="1.0.2_2021-04-21"
   shortdescription="BD_Highway_Tag"
-  description="Tag easily highways from Bangladesh. Begin to be localizated.">
+  description="Tag easily highways from Bangladesh. Begin to be localizated."
+  link="https://wiki.openstreetmap.org/wiki/Proposed_Tagging_Standard_for_Bangladesh" 
+  icon="https://raw.githubusercontent.com/josmbd/highways_bangladesh/main/img/bd_.png">
     <chunk id="surface">
         <combo key="surface" text="Surface" values="paved,unpaved,asphalt,concrete,concrete:plates,concrete:lanes,paving_stones,sett,cobblestone,grass_paver,compacted,fine_gravel,gravel,pebblestone,ground,mud,sand,grass,wood,metal" />
     </chunk>
